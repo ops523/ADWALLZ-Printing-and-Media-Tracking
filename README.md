@@ -1,20 +1,15 @@
-# AIMS
+# AIMS ERP
 
-Adwallz Inventory & Printing Production System
+Adwallz Inventory & Manufacturing System
 
-Modules
+## Modules
 
 - Dashboard
-- Media Inventory
-- Printing
+- Masters
+- Inventory
+- Production
 - Packaging
 - Dispatch
 - Reports
-- Settings
 
-Built Using
-
-- Streamlit
-- SQLAlchemy
-- PostgreSQL
-- SQLite
+Version 1
