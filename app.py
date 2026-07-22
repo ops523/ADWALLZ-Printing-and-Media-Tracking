@@ -4,6 +4,12 @@ from pages.login import login_screen
 
 from pages.dashboard import dashboard
 
+from database import create_tables
+from seed import seed_database
+
+create_tables()
+seed_database()
+
 st.set_page_config(
 
     page_title="AIMS ERP",
