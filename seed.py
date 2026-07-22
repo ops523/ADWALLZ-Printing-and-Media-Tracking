@@ -1,12 +1,22 @@
-"""
-Initial Master Data
-"""
+from database import (
+    SessionLocal,
+    create_tables
+)
 
-from database import SessionLocal
+from models import (
+    Warehouse,
+    User
+)
 
-from models import Warehouse
+from utils.security import hash_password
+
+create_tables()
 
 db = SessionLocal()
+
+#######################################################
+# Warehouse
+#######################################################
 
 if db.query(Warehouse).count() == 0:
 
@@ -26,6 +36,32 @@ if db.query(Warehouse).count() == 0:
 
     )
 
-    db.commit()
+#######################################################
+# Admin User
+#######################################################
+
+if db.query(User).count() == 0:
+
+    db.add(
+
+        User(
+
+            username="admin",
+
+            password=hash_password("admin123"),
+
+            full_name="System Administrator",
+
+            role="Administrator",
+
+            active=True
+
+        )
+
+    )
+
+db.commit()
 
 db.close()
+
+print("Database Initialized")
