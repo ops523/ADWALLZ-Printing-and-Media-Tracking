@@ -8,6 +8,10 @@ from init_db import initialize_database
 
 initialize_database()
 
+git add .
+git commit -m "Auto initialize database"
+git push
+
 st.set_page_config(
 
     page_title="AIMS ERP",
