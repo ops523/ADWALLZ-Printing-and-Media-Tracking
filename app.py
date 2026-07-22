@@ -1,5 +1,9 @@
 import streamlit as st
 
+from pages.login import login_screen
+
+from pages.dashboard import dashboard
+
 st.set_page_config(
 
     page_title="AIMS ERP",
@@ -8,8 +12,46 @@ st.set_page_config(
 
 )
 
-st.title("AIMS ERP")
+if "logged_in" not in st.session_state:
 
-st.success("Foundation Created Successfully")
+    st.session_state.logged_in = False
 
-st.write("Sprint 1 - Part 1")
+if not st.session_state.logged_in:
+
+    login_screen()
+
+    st.stop()
+
+##################################################
+
+st.sidebar.title("AIMS ERP")
+
+st.sidebar.write(
+
+    st.session_state.user
+
+)
+
+page = st.sidebar.radio(
+
+    "Navigation",
+
+    [
+
+        "Dashboard",
+
+        "Logout"
+
+    ]
+
+)
+
+if page == "Dashboard":
+
+    dashboard()
+
+if page == "Logout":
+
+    st.session_state.logged_in = False
+
+    st.rerun()
