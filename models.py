@@ -88,3 +88,102 @@ class MediaProduct(Base):
     manufacturer=relationship(
         "Manufacturer"
     )
+###############################################################
+# WAREHOUSE
+###############################################################
+
+class Warehouse(Base):
+
+    __tablename__ = "warehouses"
+
+    id = Column(Integer, primary_key=True)
+
+    warehouse_code = Column(String(30), unique=True)
+
+    warehouse_name = Column(String(200))
+
+    city = Column(String(100))
+
+    state = Column(String(100))
+
+    active = Column(Boolean, default=True)
+
+
+###############################################################
+# PRINTER
+###############################################################
+
+class Printer(Base):
+
+    __tablename__ = "printers"
+
+    id = Column(Integer, primary_key=True)
+
+    printer_name = Column(String(200))
+
+    city = Column(String(100))
+
+    contact_person = Column(String(150))
+
+    mobile = Column(String(50))
+
+    active = Column(Boolean, default=True)
+
+
+###############################################################
+# MEDIA ROLL
+###############################################################
+
+class MediaRoll(Base):
+
+    __tablename__ = "media_rolls"
+
+    id = Column(Integer, primary_key=True)
+
+    asset_id = Column(String(40), unique=True)
+
+    supplier_id = Column(
+        Integer,
+        ForeignKey("suppliers.id")
+    )
+
+    product_id = Column(
+        Integer,
+        ForeignKey("media_products.id")
+    )
+
+    warehouse_id = Column(
+        Integer,
+        ForeignKey("warehouses.id")
+    )
+
+    manufacturer_roll_no = Column(String(100))
+
+    purchase_order = Column(String(100))
+
+    invoice_number = Column(String(100))
+
+    ordered_length_m = Column(Float)
+
+    actual_length_m = Column(Float)
+
+    width_ft = Column(Float)
+
+    actual_sqft = Column(Float)
+
+    qr_path = Column(String(300))
+
+    status = Column(String(50))
+
+    remarks = Column(Text)
+
+    created_at = Column(
+        DateTime(timezone=True),
+        server_default=func.now()
+    )
+
+    supplier = relationship("Supplier")
+
+    product = relationship("MediaProduct")
+
+    warehouse = relationship("Warehouse")
