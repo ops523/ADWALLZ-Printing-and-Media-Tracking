@@ -1,43 +1,21 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm import declarative_base
-
+from sqlalchemy.orm import declarative_base, sessionmaker
 from config import DATABASE_URL
 
 engine = create_engine(
-
     DATABASE_URL,
-
     future=True,
-
-    pool_size=10,
-
-    max_overflow=20,
-
-    pool_pre_ping=True,
-
-    echo=False
-
+    echo=False,
+    connect_args={"check_same_thread": False}
 )
 
-def create_tables():
-
-    import models
-
-    Base.metadata.create_all(engine)
-
 SessionLocal = sessionmaker(
-
     bind=engine,
-
     autoflush=False,
-
     autocommit=False
-
 )
 
 Base = declarative_base()
-
 
 def get_db():
 
