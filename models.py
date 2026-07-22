@@ -187,3 +187,36 @@ class MediaRoll(Base):
     product = relationship("MediaProduct")
 
     warehouse = relationship("Warehouse")
+###############################################################
+# INVENTORY LEDGER
+###############################################################
+
+class InventoryLedger(Base):
+
+    __tablename__ = "inventory_ledger"
+
+    id = Column(Integer, primary_key=True)
+
+    roll_id = Column(
+        Integer,
+        ForeignKey("media_rolls.id")
+    )
+
+    transaction_type = Column(String(50))
+
+    quantity_sqft = Column(Float)
+
+    reference_type = Column(String(50))
+
+    reference_number = Column(String(100))
+
+    remarks = Column(Text)
+
+    created_by = Column(String(100))
+
+    created_at = Column(
+        DateTime(timezone=True),
+        server_default=func.now()
+    )
+
+    roll = relationship("MediaRoll")
