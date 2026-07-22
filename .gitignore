@@ -1,5 +1,4 @@
 __pycache__/
-
 *.pyc
 
 .env
@@ -8,12 +7,12 @@ database/*.db
 
 logs/
 
-qr_codes/
-
 reports/
 
-.vscode/
+qr_codes/
 
 .idea/
+
+.vscode/
 
 .DS_Store
