@@ -1,67 +1,20 @@
-from database import (
-    SessionLocal,
-    create_tables
-)
-
-from models import (
-    Warehouse,
-    User
-)
-
+from database import SessionLocal
+from models import User
 from utils.security import hash_password
 
-create_tables()
+def seed_database():
+    db = SessionLocal()
 
-db = SessionLocal()
-
-#######################################################
-# Warehouse
-#######################################################
-
-if db.query(Warehouse).count() == 0:
-
-    db.add(
-
-        Warehouse(
-
-            warehouse_code="WH001",
-
-            warehouse_name="Central Warehouse",
-
-            city="Mumbai",
-
-            state="Maharashtra"
-
+    if db.query(User).count() == 0:
+        db.add(
+            User(
+                username="admin",
+                password=hash_password("admin123"),
+                full_name="System Administrator",
+                role="Administrator",
+                active=True,
+            )
         )
 
-    )
-
-#######################################################
-# Admin User
-#######################################################
-
-if db.query(User).count() == 0:
-
-    db.add(
-
-        User(
-
-            username="admin",
-
-            password=hash_password("admin123"),
-
-            full_name="System Administrator",
-
-            role="Administrator",
-
-            active=True
-
-        )
-
-    )
-
-db.commit()
-
-db.close()
-
-print("Database Initialized")
+    db.commit()
+    db.close()
