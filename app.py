@@ -4,11 +4,9 @@ from pages.login import login_screen
 
 from pages.dashboard import dashboard
 
-from database import create_tables
-from seed import seed_database
+from init_db import initialize_database
 
-create_tables()
-seed_database()
+initialize_database()
 
 st.set_page_config(
 
