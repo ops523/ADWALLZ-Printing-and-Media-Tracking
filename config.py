@@ -1,7 +1,20 @@
-APP_NAME = "Media Roll Production Tracker"
+from pathlib import Path
+import os
 
-DATABASE = "database/media_rolls.db"
+BASE_DIR = Path(__file__).resolve().parent
 
-VERSION = "Version 1.0"
+APP_NAME = "AIMS"
+
+VERSION = "1.0.0"
 
 COMPANY = "ADWALLZ"
+
+DATABASE_URL = os.getenv(
+    "DATABASE_URL",
+    f"sqlite:///{BASE_DIR/'database'/'aims.db'}"
+)
+
+SECRET_KEY = os.getenv(
+    "SECRET_KEY",
+    "CHANGE_THIS_SECRET_KEY"
+)
