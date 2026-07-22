@@ -3,15 +3,13 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent
 
-APP_NAME = "AIMS ERP"
-
-COMPANY = "ADWALLZ"
-
-VERSION = "1.0"
+# Ensure database directory exists
+DATABASE_DIR = BASE_DIR / "database"
+DATABASE_DIR.mkdir(exist_ok=True)
 
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    f"sqlite:///{BASE_DIR/'database'/'aims.db'}"
+    f"sqlite:///{DATABASE_DIR / 'aims.db'}"
 )
 
 SECRET_KEY = os.getenv(
